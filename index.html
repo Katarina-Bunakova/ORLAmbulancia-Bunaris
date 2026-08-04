@@ -454,9 +454,22 @@
 }
 
 @media (max-width: 860px) {
-  .services-layout { grid-template-columns: 1fr; }
-  .services-photo { aspect-ratio: 16 / 9; min-height: 0; position: static; }
-  .services-layout .services-grid { grid-template-columns: 1fr; }
+  .services-layout {
+    display: flex;
+    flex-direction: column;
+  }
+  .services-photo {
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+    position: static;
+    width: 100%;
+    order: 1;
+  }
+  .services-layout .services-grid {
+    grid-template-columns: 1fr;
+    order: 2;
+    margin-top: 24px;
+  }
 }
   </style>
 </head>
