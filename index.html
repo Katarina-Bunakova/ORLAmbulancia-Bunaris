@@ -384,18 +384,27 @@
   width: 100%;
   aspect-ratio: 16 / 9;
   border-radius: 22px;
+  position: relative;
+  overflow: hidden;
   background:
     linear-gradient(135deg, rgba(11,160,160,0.18), rgba(4,47,46,0.12)),
     repeating-linear-gradient(45deg, rgba(7,94,94,0.06) 0 14px, transparent 14px 28px);
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--teal-600);
   border: 1px dashed rgba(7,94,94,0.3);
 }
-.team-photo svg { width: 64px; height: 64px; opacity: 0.5; }
+.team-photo img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.team-photo.img-failed {
+  display: flex; align-items: center; justify-content: center;
+}
+.team-photo.img-failed::after {
+  content: '📷';
+  font-size: 2rem;
+  opacity: 0.4;
+}
 .team-photo-cap {
   text-align: center;
   margin-top: 12px;
@@ -414,20 +423,29 @@
 .services-photo {
   border-radius: 22px;
   min-height: 420px;
+  position: relative;
+  overflow: hidden;
   background:
     linear-gradient(135deg, rgba(11,160,160,0.18), rgba(4,47,46,0.12)),
     repeating-linear-gradient(45deg, rgba(7,94,94,0.06) 0 14px, transparent 14px 28px);
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--teal-600);
   border: 1px dashed rgba(7,94,94,0.3);
   position: sticky;
   top: 100px;
 }
-.services-photo svg { width: 60px; height: 60px; opacity: 0.5; }
+.services-photo img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.services-photo.img-failed {
+  display: flex; align-items: center; justify-content: center;
+}
+.services-photo.img-failed::after {
+  content: '📷';
+  font-size: 2.4rem;
+  opacity: 0.4;
+}
 
 /* The grid now lives inside the right column, so keep it to 2 columns */
 .services-layout .services-grid {
@@ -491,8 +509,10 @@
 
       <!-- Spoločná fotografia tímu -->
 <div class="team-photo-wrap">
-  <div class="team-photo" role="img" aria-label="Spoločná fotografia lekárky a sestry"
-       style="background-image: url('GroupPhoto.jpeg'); border: 0;"></div>
+  <div class="team-photo">
+    <img src="GroupPhoto.jpeg" alt="Spoločná fotografia lekárky a sestry"
+         onerror="this.closest('.team-photo').classList.add('img-failed'); this.remove();">
+  </div>
   <p class="team-photo-cap">Náš tím je tu pre vás.</p>
 </div>
 
@@ -540,8 +560,10 @@
 
       <div class="services-layout">
         <!-- Vertikálny fotorámik -->
-        <div class="services-photo" role="img" aria-label="Fotografia ambulancie"
-             style="background-image: url('Patient.jpeg'); border: 0;"></div>
+        <div class="services-photo">
+          <img src="Patient.jpeg" alt="Fotografia ambulancie"
+               onerror="this.closest('.services-photo').classList.add('img-failed'); this.remove();">
+        </div>
 
         <div class="services-grid">
           <div class="service">
